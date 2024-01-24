@@ -1,0 +1,7 @@
+<button class="btn btn-success" [disabled]="!isStopped" (click)="onStart()">
+  Start
+</button>
+
+<button class="btn btn-danger" [disabled]="isStopped" (click)="onStop()">
+  Stop
+</button>

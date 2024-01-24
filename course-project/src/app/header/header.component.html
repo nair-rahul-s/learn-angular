@@ -1,0 +1,35 @@
+<!-- Standard navbar structure on screen is created with this -->
+<nav class="navbar navbar-default">
+  <!-- Spans the entire width of the viewport acc to screen size-->
+  <div class="container-fluid">
+    <!-- The css for a header if a navbar. mostly should contain the navbar brand -->
+    <div class="navbar-header">
+      <!-- Gives a brand like CSS for our website name -->
+      <a href="#" class="navbar-brand">Recipe Book</a>
+    </div>
+
+    <!-- Collapsable list of navbar elements -->
+    <div class="collapse navbar-collapse">
+      <!-- Keeps the navigating links side by side with proper css -->
+      <ul class="nav navbar-nav">
+        <li><a href="#recipe" (click)="onShowRecipe()">Recipes</a></li>
+        <li><a href="#shopping" (click)="onShowShoppingList()">Shopping</a></li>
+      </ul>
+      <!-- Keeps the navigating links side by side with proper css, also positioned right -->
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Enables the dropdown -->
+        <li class="dropdown">
+          <!-- Creates a dropdown toggle button on which if clicked the menu opens with the list -->
+          <a href="#" class="dropdown-toggle" role="button"
+            >Manage <span class="caret"></span
+          ></a>
+          <!-- The original dropdown menu items -->
+          <ul class="dropdown-menu">
+            <li><a href="#">Save Data</a></li>
+            <li><a href="#">Fetch Data</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

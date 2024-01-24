@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <app-game-control
+      (generation)="onValueGenerated($event)"
+    ></app-game-control>
+  </div>
+  <hr />
+  <div *ngFor="let val of values">
+    <app-odd *ngIf="val % 2 != 0" [value]="val"></app-odd>
+    <app-even *ngIf="val % 2 == 0" [value]="val"></app-even>
+  </div>
+</div>

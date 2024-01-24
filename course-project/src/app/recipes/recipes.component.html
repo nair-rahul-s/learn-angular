@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <app-recipe-list
+        (listItemSelection)="onListItemSelection($event)"
+      ></app-recipe-list>
+    </div>
+    <div class="col-md-7">
+      <app-recipe-detail
+        *ngIf="recipeToDisplay; else noRecipe"
+        [recipe]="recipeToDisplay"
+      ></app-recipe-detail>
+      <ng-template #noRecipe>
+        <p>Click a recipe !!</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
