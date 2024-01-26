@@ -74,11 +74,14 @@
 5. **Note: You can get a list of properties and events which you can bind to, from MDN docs**
 
 ## Directives in Angular
+
 ![Directives in Angular](/images/structural%20vs%20attribute%20directive.png)
+
 1. Directives are instructions to the DOM.
 2. Components are kind of directives with templates. Because we specify the component selector in our html code, that plugs in the component template and its business logic in our html page.
 3. But directives can also be attributes to a specific selector, that perform specific actions on the tag which it is attached to.
 4. We can write our custom directives, but angular provides us with some useful ones like `ngIf` and `ngFor`.
+
    1. `ngIf` directive ->
       1. Structural directive, modifies dom in realtime. Need to put `*` before the directive.
       2. Enables structure only if the boolean condition matches.
@@ -96,7 +99,14 @@
               <p>No username is entered</p>
             </ng-template>
             ```
+         2. ngIf can also be used as follows, and this is what happens in background when we use `*ngIf`
+            ```html
+            <ng-template [ngIf]="!isEmpty()">
+              <p>No username is entered</p>
+            </ng-template>
+            ```
    2. `ngStyle` directive ->
+
       1. `ngStyle` is a property directive. It is used to dynamically style the tag in question.
       2. Eg:
          ```html
@@ -105,7 +115,9 @@
          </p>
          ```
       3. Here the background color of the paragraph is set by function `getColor()`. Get color returns color name based on `serverStatus` value, like green when serverStatus is online or red otherwise.
+
    3. `ngClass` directive ->
+
       1. `ngClass` is a property directive. It is used to dynamically set the class to a tag in question.
       2. Eg:<br>
          html
@@ -121,11 +133,31 @@
          }
          ```
       3. Here the `online` class is set to the `p` tag based on the expression withing `ngClass`. online class sets the background color as green if value of `serverStatus` variable is `'online'`
-   4. To create a custom attribute directive:
-      1. create a ts class and add a decorator `@Directive({selector:'[selector-name]'})`. 
+
+   4. `ngSwitch` directive ->
+
+      ```html
+      <!-- oddOrEven is a variable whose value can be 'odd' or 'even' -->
+      <div [ngSwitch]="oddOrEven">
+        <p *ngSwitchCase="'odd'" style="color: brown">Odd Number Generated</p>
+        <p *ngSwitchCase="'even'" style="color: green">Even Number Generated</p>
+        <p *ngSwitchDefault>
+          No Number Generated. Click start to generate number
+        </p>
+      </div>
+      ```
+
+   5. To create a custom attribute directive:
+
+      1. create a ts class and add a decorator `@Directive({selector:'[selector-name]'})`.
       2. In the directive constructor, accept a variable of type `ElementRef`
       3. Add the directive to the declarations array in `app.module.ts`
       4. Use the directive in any of the tags we desire.
+      5. Or We could use `ng g d <directive-name>` and skip 1-4 steps
+
+   6. We can use `@HostBinding` to bind to the desired element property and `@HostListener` to listen to a desired event and achieve required behaviour on the bound property if element
+
+   7. We can also use `ElementRef` and `Renderer2` to bind and alter the property but the above is better suited.
 
 # Binding custom properties and events in angular
 
@@ -143,54 +175,61 @@
 3. Eventemitter emits events with data. This data can be received with `$event` object within the event binding syntax of the custom event in html.
 4. We can also provide aliases as a parameter into the `@Output()` decorator, and this alias will the the custom event name
 
-
 ## View encapsulation in angular
+
 1. View encapsulation is the default behavior of angular componenets
 2. View encapsulation means, the styling applied in css file of a component, is only applicable to that component, and not anywhere else, by default.
-3. This is because angular creates sepcialized elements/tags for each component with unique ids, and styling is pplied to these elements individually.
+3. This is because angular internally creates sepcialized elements/tags for each component with unique ids, and styling is pplied to these elements individually.
 4. This behavior can be controlled by `encapsulation` property and its values in `@Component` decorator.
 5. [View Encapsulation](https://angular.io/guide/view-encapsulation)
 
 ## Template reference in angular
+
 1. Reference to a html element/tag can be passed as a whole to a typescript object in angular
 2. This can be done by creating a reference of html element by `#<someReferenceName>` .
 3. This reference can be passed to any binding method as a parameter, and it will be of type `<HTMLInputElement>`.
 4. This has many attributes and methods that can be used in .ts code
 
 ## ViewChild in angular
+
 1. Same as template reference, except here a variable decorated with `@ViewChild('someReferenceName')` refers to the html element.
 2. Type of the variable will be of `ElementRef`.
 
-
 ## ng-content (template projection) in angular
+
 1. Suppose we need to add some html in our custom component, that is variable.
 2. At that place we put a tag `<ng-content>` in our component
 3. In our calling component we pass the variable template, between our custom component tags.
-Eg:
-**variable.component.html**
-```html
-<div>
-   <ng-content>
-</div>
-```
+   Eg:
+   **variable.component.html**
 
-**app.component.html**
-```html
-<app-variable>
-   <p>Some content</p>
-</app-variable>
-```
+   ```html
+   <div>
+      <ng-content>
+   </div>
+   ```
 
-**some-other.component.html**
-```html
-<app-variable>
-   <p>Some other content</p>
-</app-variable>
-```
+   **app.component.html**
+
+   ```html
+   <app-variable>
+     <p>Some content</p>
+   </app-variable>
+   ```
+
+   **some-other.component.html**
+
+   ```html
+   <app-variable>
+     <p>Some other content</p>
+   </app-variable>
+   ```
+
 4. In the aboe example, during rendering, the paragraph will be projected at the place of `<ng-content>`
 5. This works only if we add `<ng-content>` in `variable.component.html`.
 
 ## ContentChild in angular
+
 1. Same as viewChild, but should be used to refer any element that is projected via `ng-content`
 2. `@ContentChild('ng-content-element-reference')`
 3. 2. Type of the variable will be of `ElementRef`.

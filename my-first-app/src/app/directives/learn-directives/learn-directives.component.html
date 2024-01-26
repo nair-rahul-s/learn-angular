@@ -1,0 +1,38 @@
+<p appBasicHighlight>Basic directive using ElementRef</p>
+<p appBetterHighlight>Better directive using HostListener and Renderer2</p>
+<p
+  appBetterHighlightV2
+  [defaultBackgroundColor]="'transparent'"
+  [highlightBackgroundColor]="'blue'"
+>
+  Directive using HostListener and Hostbinding
+</p>
+
+<div class="container">
+  <h6>Custom Structural directive demo</h6>
+
+  <div [ngSwitch]="oddOrEven">
+    <p *ngSwitchCase="'odd'" style="color: brown">Odd Number Generated</p>
+    <p *ngSwitchCase="'even'" style="color: green">Even Number Generated</p>
+    <p *ngSwitchDefault>No Number Generated. Click start to generate number</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <button
+        [disabled]="!isStopped"
+        (click)="onStart()"
+        style="margin-right: 5px"
+      >
+        Start
+      </button>
+      <button [disabled]="isStopped" (click)="onStop()">Stop</button>
+    </div>
+    <div class="col-md-8">
+      <div *ngFor="let val of values">
+        <p *ngIf="isEven(val)">Even value {{ val }} generated</p>
+        <p *appIfNot="isEven(val)">Odd value {{ val }} generated</p>
+      </div>
+    </div>
+  </div>
+</div>
