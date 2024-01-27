@@ -5,9 +5,8 @@
   <hr />
   <div class="col-xs-12">
     <app-recipe-item
-      *ngFor="let item of recipes"
-      [recipe]="item" 
-      (itemSelection) = "onItemSelection(item)"
+      *ngFor="let item of recipeList"
+      [recipeItem]="item"
     ></app-recipe-item>
   </div>
 </div>
