@@ -237,3 +237,21 @@
 ## Angular lifecycle hooks
 
 ![Angular Lifecycle Hooks](images/angular-lifecycle-hooks.png)
+
+## Services in Angular
+
+![Services in Angular](images/services-in-angular.png)
+
+1. Services are typically a typescript class, where we can centralize some common logic to be executed, or code to **_provide some data_** across the components.
+2. `ng generate service <service-name>` command generates a service class for you. `<service-name>.service.ts` is the general naming convention
+3. Dependency injection in angular, is a concept where angular autowires the specified dependency/service, without us explicitly instantiating it.
+4. To have dependency injection, we must do couple of things:
+   1. Import the service into the desired class
+   2. Add the service name in providers array, at component or module level based on the injection requirement.
+      1. If we need only a single instance of service at app level, add the service in providers array of `app.module.ts`
+      2. If we need single instance of service at a specific module level, add the service in providers array of the module decorated with `@NgModule`.
+      3. If we have nested components and we need single instance of service at the parent component level, then add the service in providers array of the `@Component` decorator, in the parent component.
+      4. If we need the instance of service at each component level, then then add the service in providers array of the `@Component` decorator, in each component.
+      5. **Note:** If a service is provided in parent component, do not provide it in child component, unless you want a separate instantiation for child component.(Provide means adding in providers array)
+   3. Also add the service in the constructor parameters for injection.
+5. `@Injectable()` decorator on the service tells angular that the service can have dependencies on other service and they need to be injected before initializing the service.

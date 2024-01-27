@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +18,10 @@ import { BetterHighlightDirective } from './directives/learn-directives/better-h
 import { LearnDirectivesComponent } from './directives/learn-directives/learn-directives.component';
 import { BetterHighlightV2Directive } from './directives/learn-directives/better-highlight-v2/better-highlight-v2.directive';
 import { IfNotDirective } from './directives/learn-directives/unless/if-not.directive';
+import { AssgnServiceComponent } from './services/assgn-service/assgn-service.component';
+import { ActiveUsersComponent } from './services/assgn-service/active-users/active-users.component';
+import { InactiveUsersComponent } from './services/assgn-service/inactive-users/inactive-users.component';
+import { CounterService } from './services/assgn-service/shared/counter.service';
 
 @NgModule({
   declarations: [
@@ -31,16 +38,17 @@ import { IfNotDirective } from './directives/learn-directives/unless/if-not.dire
     BetterHighlightDirective,
     LearnDirectivesComponent,
     BetterHighlightV2Directive,
-    IfNotDirective
+    IfNotDirective,
+    AssgnServiceComponent,
+    ActiveUsersComponent,
+    InactiveUsersComponent,
   ],
   imports: [
     // use this array to import all the modules
     BrowserModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [
-    provideClientHydration()
-  ],
+  providers: [provideClientHydration(), CounterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
